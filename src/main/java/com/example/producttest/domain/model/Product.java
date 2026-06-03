@@ -40,4 +40,8 @@ public class Product {
         return product;
     }
 
+    public void reduceStock(Integer quantity) {
+        this.stockQuantity -= quantity;
+    }
+
 }
