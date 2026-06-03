@@ -1,3 +1,20 @@
 spring:
   application:
     name: producttest
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ${apps.kafka.groupId}
+
+
+app:
+  kafka:
+    producer:
+      ack-mode: true
+      type-mapping: ""
+      topic-producer: product-messaging
+    listener:
+      group-id: ""
+      auto-offset: earliest
+
