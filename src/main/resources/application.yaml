@@ -17,4 +17,5 @@ app:
     listener:
       group-id: ""
       auto-offset: earliest
+      order-topic: order-created
 
