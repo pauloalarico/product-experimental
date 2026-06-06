@@ -15,6 +15,7 @@ public class OrderEventMapper {
         for (OrderCreatedEvent.Item i : event.items()) {
             products.put(i.id(), i.quantity());
         }
-        return new ConsultProductCommand(products);
+        return new ConsultProductCommand(event.correlationId(), event.id(), products);
     }
+
 }
