@@ -25,7 +25,8 @@ public class VerifyStockUseCase {
         this.publisher = publisher;
     }
 
-    public Optional<List<ReservedItem>> verify(ConsultProductCommand command) {
+    @Transactional
+    public void verify(ConsultProductCommand command) {
         var productsRequested = command.products();
         List<ReservedItem> reservedItems = new ArrayList<>();
 
