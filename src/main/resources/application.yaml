@@ -14,6 +14,7 @@ app:
       ack-mode: true
       type-mapping: ""
       topic-producer: product-messaging
+      dead-box: dead-box
     listener:
       group-id: ""
       auto-offset: earliest
