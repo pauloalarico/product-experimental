@@ -36,7 +36,7 @@ public class VerifyStockUseCase {
             var product = repository.findById(id);
             if (product.getStockQuantity() < quantity) {
                 log.error("Stock not greater than order for product {}. A total of {} in stock, requested {}", product.getName(), product.getStockQuantity(), quantity);
-                publisher.publish(new StockReserved(command.correlationId(), command.orderId(), null,
+                publisher.publishToDeadLetter(new StockReserved(command.correlationId(), command.orderId(), null,
                         StockReserved.StockStatus.OUT_OF_STOCK));
             }
             product.reduceStock(quantity);
