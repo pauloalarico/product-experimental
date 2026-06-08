@@ -14,6 +14,9 @@ public class KafkaEventPublisher implements ProductPublisher {
     @Value("${app.kafka.producer.topic-producer}")
     private String topic;
 
+    @Value("${app.kafka.producer.dead-box}")
+    private String deadLetterTopic;
+
     public KafkaEventPublisher(KafkaTemplate<String, Object> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
@@ -21,5 +24,10 @@ public class KafkaEventPublisher implements ProductPublisher {
     @Override
     public void publish(StockReserved stockReserved) {
         kafkaTemplate.send(topic, stockReserved.correlationId().toString(), stockReserved);
+    }
+
+    @Override
+    public void publishToDeadLetter(StockReserved reserved) {
+        kafkaTemplate.send(deadLetterTopic, reserved.correlationId().toString(), reserved);
     }
 }
